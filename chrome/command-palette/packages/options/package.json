@@ -1,0 +1,35 @@
+{
+  "name": "@dcp/options",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "preview": "vite",
+    "dev": "vite build --mode development --watch",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fpt-cads/ui-core": "^4.0.2",
+    "@mui/material": "^5.15.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-fast-compare": "^3.2.2",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@iconify/react": "^4.1.1",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "react-router-dom": "^6.22.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}

@@ -1,0 +1,15 @@
+export type Color =
+	| 'primary'
+	| 'secondary'
+	| 'success'
+	| 'error'
+	| 'warning'
+	| 'info'
+	| 'rose'
+	| 'pink'
+	| 'purple'
+	| 'orange'
+	| 'blue'
+	| 'cyan'
+	| 'yellow'
+	| 'grey-500';
