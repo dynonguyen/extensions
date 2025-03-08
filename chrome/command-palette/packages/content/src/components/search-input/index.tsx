@@ -41,6 +41,7 @@ export const SearchInput = () => {
   const executeCommand = async () => {
     await useCommandStore.getState().exec();
     setCommandStore({ rawInput: '' });
+    setIsCommandValid(false);
     if (ref.current) ref.current.value = '';
   };
 

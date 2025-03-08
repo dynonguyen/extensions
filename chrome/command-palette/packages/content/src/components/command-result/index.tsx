@@ -2,9 +2,7 @@ import { pick } from '@dcp/shared';
 import { useCommandStore } from '~/stores/command';
 
 export const CommandResult = () => {
-  const { error, result } = useCommandStore((state) => pick(state, ['error', 'getBotCall', 'result']));
-
-  // useCommandStore
+  const { error, result } = useCommandStore((state) => pick(state, ['error', 'result']));
 
   if (!result) return null;
 

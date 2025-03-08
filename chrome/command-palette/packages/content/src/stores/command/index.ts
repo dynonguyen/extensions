@@ -103,6 +103,7 @@ export const useCommandStore = createWithEqualityFn<CommandStore>(
             switch (result.type) {
               case 'error':
                 console.error(result.error.message);
+                set({ error: result.error });
                 return result;
               case 'action':
                 result.action();
