@@ -1,9 +1,10 @@
 import { debounce, getAliasFromKeyword } from '@dcp/shared';
-import { useCallback, useEffect, useRef } from 'preact/compat';
+import { useCallback, useEffect, useRef, useState } from 'preact/compat';
 import { useSearchStore } from '~/stores/search';
 import { useUserOptionStore } from '~/stores/user-options';
 import { searchCategoryMapping } from '~/utils/mapping';
 import Chip from '../Chip';
+import { useCommandStore } from '~/stores/command/index';
 
 const AliasCategory = () => {
   const keyword = useSearchStore((state) => state.keyword);
@@ -20,9 +21,45 @@ const AliasCategory = () => {
 };
 
 export const SearchInput = () => {
+  const [isCommandValid, setIsCommandValid] = useState<Boolean>(false);
   const setSearchStore = useSearchStore((state) => state.set);
+  const setCommandStore = useCommandStore((state) => state.set);
+
   const open = useSearchStore((state) => state.open);
   const ref = useRef<HTMLInputElement>();
+
+  const handleBotInputChange = (e: any) => {
+    const value = e.target?.value;
+    if (value) {
+      if (value[0] === '@') {
+        setCommandStore({ rawInput: value });
+        setIsCommandValid(useCommandStore.getState().isExecBotCallValid());
+      }
+    }
+  };
+
+  const executeCommand = async () => {
+    await useCommandStore.getState().exec();
+    setCommandStore({ rawInput: '' });
+    setIsCommandValid(false);
+    if (ref.current) ref.current.value = '';
+  };
+
+  const handleEnter = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      executeCommand();
+    }
+  };
+
+  const handleInputMap = (e: any) => {
+    if (e.target?.value?.[0] === '@') {
+      setSearchStore({ keyword: '' }); // clear search box (for some reason when you type @ really quickly, panel still shows up)
+      return handleBotInputChange(e);
+    } else {
+      useCommandStore.getState().reset();
+    }
+    return handleSearchChange(e);
+  };
 
   const handleSearchChange = useCallback(
     debounce((ev) => {
@@ -46,12 +83,31 @@ export const SearchInput = () => {
           // @ts-ignore
           ref={ref}
           type="text"
-          class="w-full h-full !border-none !outline-none !bg-transparent !text-base-content !text-base"
+          class="w-full h-full !border-none !outline-none !bg-transparent !text-base-content !text-base shadow-none"
           placeholder="Search for bookmarks, history,..."
-          onInput={handleSearchChange}
+          onInput={handleInputMap}
+          onKeyDown={handleEnter}
           autoComplete="off"
           autoFocus
         />
+        <button
+          disabled={!isCommandValid}
+          class="!text-base-content border-0 rounded-full text-xs font-medium transition px-2 py-2"
+          onClick={() => executeCommand()}
+          style={
+            isCommandValid
+              ? {
+                  color: `rgb(var(--purple))`,
+                  backgroundColor: `rgba(var(--purple), 0.2)`
+                }
+              : {
+                  color: `rgb(var(--grey-300)) !important`,
+                  backgroundColor: `rgba(var(--grey-300), 0.2)`
+                }
+          }
+        >
+          Execute
+        </button>
         <AliasCategory />
       </div>
       <div class="divider" />
