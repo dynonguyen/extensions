@@ -5,9 +5,9 @@ import AutoFocus from '../AutoFocus';
 import Flex from '../Flex';
 import Switch from '../Switch';
 
-type EditFormKey = keyof Cookie;
+type FormKey = keyof Cookie;
 type RefElement = HTMLInputElement | HTMLTextAreaElement | null;
-type CookieFormValue = Partial<Record<EditFormKey, RefElement>>;
+type CookieFormValue = Partial<Record<FormKey, RefElement>>;
 export type CookieFormProps = {
   initValues?: Cookie;
   onSubmit?(value: Partial<Cookie>, ev: JSXInternal.TargetedSubmitEvent<HTMLElement>): void;
@@ -35,7 +35,7 @@ export const CookieForm = (props: CookieFormProps) => {
     httpOnly: false
   };
 
-  const handleInputRef = (field: EditFormKey) => (ref: RefElement) => {
+  const handleInputRef = (field: FormKey) => (ref: RefElement) => {
     if (ref) {
       formRefs.current[field] = ref;
 
@@ -99,7 +99,7 @@ export const CookieForm = (props: CookieFormProps) => {
         />
       </AutoFocus>
 
-      <input type="text" class="input" placeholder="Value" rows={3} ref={handleInputRef('value')} autocomplete="off" />
+      <input type="text" class="input" placeholder="Value" ref={handleInputRef('value')} autocomplete="off" />
 
       <Flex itemsFluid class="gap-2">
         <input

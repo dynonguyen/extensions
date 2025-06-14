@@ -62,6 +62,13 @@ const commands: Array<Command & { aliases?: string[] }> = [
     logoUri: getAssets('cookie.svg'),
     commandEvent: MessageEvent.NewCookie,
     isClient: true
+  },
+  {
+    title: 'New Local Storage Item',
+    aliases: ['create local storage'],
+    logoUri: getAssets('local-storage.svg'),
+    commandEvent: MessageEvent.NewLocalStorageItem,
+    isClient: true
   }
 ];
 
