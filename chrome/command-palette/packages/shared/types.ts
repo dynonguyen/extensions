@@ -29,6 +29,7 @@ export type Command = {
   title: string;
   description?: string;
   commandEvent?: MessageEvent;
+  isClient?: boolean;
 };
 
 export type Theme = {
@@ -43,6 +44,8 @@ export type History = chrome.history.HistoryItem;
 export type Tab = chrome.tabs.Tab;
 
 export type Extension = chrome.management.ExtensionInfo;
+
+export type Cookie = chrome.cookies.Cookie;
 
 // -----------------------------
 export enum MessageEvent {
@@ -85,7 +88,12 @@ export enum MessageEvent {
   DeleteHistory = 'delete-history',
 
   // Extension
-  ToggleExtension = 'toggle-extension'
+  ToggleExtension = 'toggle-extension',
+
+  // Cookie
+  DeleteCookie = 'delete-cookie',
+  SetCookie = 'set-cookie',
+  NewCookie = 'new-cookie'
 }
 
 export enum CommandEvent {
@@ -106,7 +114,8 @@ export enum SearchCategory {
   Theme = 'theme',
   History = 'history',
   Tab = 'tab',
-  Extension = 'extension'
+  Extension = 'extension',
+  Cookie = 'cookie'
 }
 
 export enum ShortcutKey {

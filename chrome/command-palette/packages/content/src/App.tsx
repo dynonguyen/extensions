@@ -1,10 +1,11 @@
 import { getUserOptions, userOptionsChangeListener } from '@dcp/shared';
 import { useEffect } from 'preact/hooks';
+import ClientEventHandler from './components/background-handler/ClientEventHandler';
 import ClosePopupHandler from './components/background-handler/ClosePopupHandler';
 import MessageHandler from './components/background-handler/MessageHandler';
 import SearchHandler from './components/background-handler/SearchHandler';
 import SearchResultFocusHandler from './components/background-handler/SearchResultFocusHandler';
-import SearchBottom from './components/search-bottom';
+import SearchBottom from './components/search-action';
 import SearchInput from './components/search-input';
 import SearchResult from './components/search-result';
 import { INPUT_Z_INDEX } from './constants/common';
@@ -58,6 +59,7 @@ export const App = () => {
             <SearchResult />
             <SearchBottom />
 
+            <ClientEventHandler />
             <SearchHandler />
             <ClosePopupHandler />
           </div>
