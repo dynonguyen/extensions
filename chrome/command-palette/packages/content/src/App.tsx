@@ -8,6 +8,7 @@ import SearchResultFocusHandler from './components/background-handler/SearchResu
 import SearchBottom from './components/search-action';
 import SearchInput from './components/search-input';
 import SearchResult from './components/search-result';
+import CommandResult from './components/command-result';
 import { INPUT_Z_INDEX } from './constants/common';
 import { useSearchStore } from './stores/search';
 import { useUserOptionStore } from './stores/user-options';
@@ -61,6 +62,9 @@ export const App = () => {
 
             <ClientEventHandler />
             <SearchHandler />
+
+            <CommandResult />
+
             <ClosePopupHandler />
           </div>
         </div>
